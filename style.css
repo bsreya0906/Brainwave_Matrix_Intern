@@ -1,16 +1,13 @@
-/* Global styles */
 body {
   font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  padding: 0;
+  margin: 0 px;
+  padding: 0 px;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f8e0c0, #e6c5a8); /* Burlywood gradient */
+  background: linear-gradient(135deg, #f8e0c0, #e6c5a8); 
   display: flex;
   justify-content: center;
   align-items: flex-start;
 }
-
-/* Main container */
 .container {
   background: #fff8f0;
   margin-top: 40px;
@@ -20,20 +17,16 @@ body {
   max-width: 500px;
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
 }
-
-/* Headings */
 h1, h2 {
   text-align: center;
-  color: #4e342e; /* Deep brown */
+  color: #4e342e; 
 }
-
-/* Input form */
 .form input,
 .form select,
 .form button {
-  width: 100%;
   margin: 8px 0;
   padding: 12px;
+  width: 100%;
   font-size: 1rem;
   border: 1px solid #d7ccc8;
   border-radius: 10px;
@@ -46,7 +39,6 @@ h1, h2 {
   box-shadow: 0 0 5px rgba(161, 136, 127, 0.4);
 }
 
-/* Add Button */
 .form button {
   background-color: #a1887f;
   color: white;
@@ -60,11 +52,10 @@ h1, h2 {
   background-color: #8d6e63;
 }
 
-/* Expense List */
 #expense-list {
-  list-style: none;
   padding: 0;
   margin-top: 20px;
+  list-style: none;
 }
 
 #expense-list li {
@@ -79,16 +70,14 @@ h1, h2 {
   color: #4e342e;
 }
 
-/* Text inside list */
 #expense-list li div {
   max-width: 80%;
 }
 
-/* Delete button */
 .delete-btn {
+  padding: 6px 12px;
   background: #d84315;
   color: white;
-  padding: 6px 12px;
   border: none;
   border-radius: 8px;
   font-size: 0.9rem;
@@ -100,11 +89,10 @@ h1, h2 {
   background: #bf360c;
 }
 
-/* Clear All Button */
 .action-buttons {
+  margin-bottom: 15px;
   display: flex;
   justify-content: center;
-  margin-bottom: 15px;
 }
 
 .clear-btn {
