@@ -71,6 +71,5 @@ function clearForm() {
   document.getElementById("category").value = "Food";
 }
 
-// Initialize on page load
 renderList();
 updateTotal();
