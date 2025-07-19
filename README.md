@@ -4,6 +4,9 @@ A simple and elegant Expense Tracker built using HTML, CSS, and JavaScript.
 Created as part of my Web Development Internship at **Brainwave Matrix Solutions**.
 
 ---
+## 🌐 Live Website
+
+🔗 [Click here to view the live project](https://bsreya0906.github.io/Brainwave_Matrix_Intern/)
 
 ## 🚀 Features
 
