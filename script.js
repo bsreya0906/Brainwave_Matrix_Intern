@@ -1,68 +1,86 @@
-let expenseList = JSON.parse(localStorage.getItem("expenses")) || [];
+let storedExpenses = localStorage.getItem("expenses");
+let expenseList = storedExpenses ? JSON.parse(storedExpenses) : [];
 
 function updateTotal() {
-  const total = expenseList.reduce((acc, exp) => acc + exp.amount, 0);
+  let total = 0;
+  for (let i = 0; i < expenseList.length; i++) {
+    total = total + expenseList[i].amount;
+  }
   document.getElementById("total").innerText = total.toFixed(2);
 }
 
 function addExpense() {
-  const name = document.getElementById("name").value;
-  const amount = parseFloat(document.getElementById("amount").value);
-  const category = document.getElementById("category").value;
-  const date = new Date().toLocaleString();
+  let name = document.getElementById("name").value;
+  let amountText = document.getElementById("amount").value;
+  let category = document.getElementById("category").value;
 
-  if (!name || !amount || amount <= 0) {
-    alert("Please enter valid name and amount");
+  let amount = Number(amountText);
+  let date = new Date().toLocaleString();
+
+  if (name === "" || isNaN(amount) || amount <= 0) {
+    alert("Enter a valid name and amount");
     return;
   }
 
-  const expense = {
-    id: Date.now(),
-    name,
-    amount,
-    category,
-    date
+  let expense = {
+    id: new Date().getTime(),
+    name: name,
+    amount: amount,
+    category: category,
+    date: date
   };
 
   expenseList.push(expense);
   localStorage.setItem("expenses", JSON.stringify(expenseList));
 
-  renderList();
+  showExpenses();
   updateTotal();
   clearForm();
 }
 
-function deleteExpense(id) {
-  expenseList = expenseList.filter(e => e.id !== id);
+function deleteExpense(idToDelete) {
+  let newList = [];
+
+  for (let i = 0; i < expenseList.length; i++) {
+    if (expenseList[i].id !== idToDelete) {
+      newList.push(expenseList[i]);
+    }
+  }
+
+  expenseList = newList;
   localStorage.setItem("expenses", JSON.stringify(expenseList));
-  renderList();
+
+  showExpenses();
   updateTotal();
 }
 
 function clearAll() {
-  if (confirm("Are you sure you want to delete all expenses?")) {
+  let sure = confirm("Delete all expenses?");
+  if (sure) {
     localStorage.removeItem("expenses");
     expenseList = [];
-    renderList();
+    showExpenses();
     updateTotal();
   }
 }
 
-function renderList() {
-  const list = document.getElementById("expense-list");
+function showExpenses() {
+  let list = document.getElementById("expense-list");
   list.innerHTML = "";
 
-  expenseList.forEach(exp => {
-    const item = document.createElement("li");
+  for (let i = 0; i < expenseList.length; i++) {
+    let item = document.createElement("li");
+
     item.innerHTML = `
       <div>
-        <strong>${exp.name}</strong> - ₹${exp.amount} (${exp.category})<br>
-        <small>${exp.date}</small>
+        <strong>${expenseList[i].name}</strong> - ₹${expenseList[i].amount} (${expenseList[i].category})<br>
+        <small>${expenseList[i].date}</small>
       </div>
-      <button class="delete-btn" onclick="deleteExpense(${exp.id})">Delete</button>
+      <button class="delete-btn" onclick="deleteExpense(${expenseList[i].id})">Delete</button>
     `;
+
     list.appendChild(item);
-  });
+  }
 }
 
 function clearForm() {
@@ -71,5 +89,5 @@ function clearForm() {
   document.getElementById("category").value = "Food";
 }
 
-renderList();
+showExpenses();
 updateTotal();
